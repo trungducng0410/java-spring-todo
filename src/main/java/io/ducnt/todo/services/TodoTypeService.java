@@ -2,6 +2,7 @@ package io.ducnt.todo.services;
 
 import io.ducnt.todo.domains.TodoType;
 import io.ducnt.todo.repositories.TodoTypeRepository;
+import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,10 +17,13 @@ import java.util.List;
 public class TodoTypeService {
 
     private final TodoTypeRepository todoTypeRepository;
+    private final Validator validator;
+
 
     @Autowired
-    public TodoTypeService(TodoTypeRepository todoTypeRepository) {
+    public TodoTypeService(TodoTypeRepository todoTypeRepository, Validator validator) {
         this.todoTypeRepository = todoTypeRepository;
+        this.validator = validator;
     }
 
     public TodoType create(TodoType todoType) {
@@ -49,4 +53,5 @@ public class TodoTypeService {
         Page<TodoType> todoTypePages = todoTypeRepository.findAll(pageRequest);
         return todoTypePages.getContent();
     }
+
 }

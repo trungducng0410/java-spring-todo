@@ -3,6 +3,7 @@ package io.ducnt.todo.controllers;
 import io.ducnt.todo.domains.Todo;
 import io.ducnt.todo.services.TodoService;
 import io.ducnt.todo.services.TodoTypeService;
+import io.ducnt.todo.utils.aop.LogMethodDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,7 @@ public class TodoController {
     }
 
     @GetMapping("/{id}")
+    @LogMethodDetails
     public Todo read(@PathVariable long id) {
         return todoService.findById(id);
     }
@@ -50,6 +52,7 @@ public class TodoController {
     }
 
     @GetMapping()
+    @LogMethodDetails
     public List<Todo> findAll(@RequestParam String sort,
                               @RequestParam String order,
                               @RequestParam int pageNumber,
